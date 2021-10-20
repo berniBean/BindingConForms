@@ -13,16 +13,18 @@ namespace DirectorioFrameWork
 {
     public partial class Form1 : Form
     {
-        private BindingList<CTelefono> colTfnos;
-        private CurrencyManager cm;
+        private List<CTelefono> colTfnos;
+        private BindingSource bs;
         public Form1()
         {
             InitializeComponent();
             colTfnos = FactoriaTelefono.ObtenerColeccionCTelefono();
-            lsTfnos.DataSource = colTfnos;
+            bs = new BindingSource();
+            bs.DataSource = colTfnos;
+            lsTfnos.DataSource = bs;
             lsTfnos.DisplayMember = "Nombre";
-            ctTfnosSelec.DataBindings.Add("Text", colTfnos, "Telefono");
-            cm = lsTfnos.BindingContext[colTfnos] as CurrencyManager;
+            ctTfnosSelec.DataBindings.Add("Text", bs, "Telefono");
+            
         }
 
         private void btAñadir_Click(object sender, EventArgs e)
@@ -30,31 +32,40 @@ namespace DirectorioFrameWork
             decimal tef = 0;
             if (ctNombre.Text.Length != 0 && ctTfno.Text.Length != 0 &&
                 Decimal.TryParse(ctTfno.Text, out tef))
+            {
                 colTfnos.Add(FactoriaTelefono.CrearCTelefono(ctNombre.Text, tef));
+                bs.Position = bs.Count;
+                bs.CurrencyManager.Refresh();
+            }
+
         }
 
         private void btBorrar_Click(object sender, EventArgs e)
         {
-            int pos = lsTfnos.SelectedIndex;
-            if (pos < 0) return;
-            colTfnos.RemoveAt(cm.Position);
+            
+            if (bs.Position < 0) return;
+            colTfnos.RemoveAt(bs.Position);
+            bs.CurrencyManager.Refresh();
         }
 
         private void btModificar_Click(object sender, EventArgs e)
         {
-            int pos = lsTfnos.SelectedIndex;
+            bool cambios = false;
             
             if(ctNombre.Text.Length != 0)
             {
-                colTfnos[pos].Nombre = ctNombre.Text;
+                (bs.Current as CTelefono).Nombre = ctNombre.Text;
+                cambios = true;
                 
             }
             decimal tef = 0;
             if(ctTfno.Text.Length !=0 && Decimal.TryParse(ctTfno.Text, out tef))
             {
-                colTfnos[pos].Telefono = tef;
-                
+                (bs.Current as CTelefono).Telefono = tef;
+                cambios = true;
             }
+
+            if (cambios) bs.CurrencyManager.Refresh();
             
         }
     }

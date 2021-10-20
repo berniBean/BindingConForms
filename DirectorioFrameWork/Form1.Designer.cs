@@ -29,7 +29,6 @@ namespace DirectorioFrameWork
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lsTfnos = new System.Windows.Forms.ListBox();
             this.ctTfnosSelec = new System.Windows.Forms.TextBox();
             this.ctNombre = new System.Windows.Forms.TextBox();
@@ -37,14 +36,10 @@ namespace DirectorioFrameWork
             this.btAñadir = new System.Windows.Forms.Button();
             this.btBorrar = new System.Windows.Forms.Button();
             this.btModificar = new System.Windows.Forms.Button();
-            this.cTelefonoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.cTelefonoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lsTfnos
             // 
-            this.lsTfnos.DataSource = this.cTelefonoBindingSource;
-            this.lsTfnos.DisplayMember = "Nombre";
             this.lsTfnos.FormattingEnabled = true;
             this.lsTfnos.Location = new System.Drawing.Point(44, 36);
             this.lsTfnos.Name = "lsTfnos";
@@ -103,10 +98,6 @@ namespace DirectorioFrameWork
             this.btModificar.UseVisualStyleBackColor = true;
             this.btModificar.Click += new System.EventHandler(this.btModificar_Click);
             // 
-            // cTelefonoBindingSource
-            // 
-            this.cTelefonoBindingSource.DataSource = typeof(DirectorioFrameWork.Clases.CTelefono);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,7 +112,6 @@ namespace DirectorioFrameWork
             this.Controls.Add(this.lsTfnos);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.cTelefonoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,7 +126,6 @@ namespace DirectorioFrameWork
         private System.Windows.Forms.Button btAñadir;
         private System.Windows.Forms.Button btBorrar;
         private System.Windows.Forms.Button btModificar;
-        private System.Windows.Forms.BindingSource cTelefonoBindingSource;
     }
 }
 

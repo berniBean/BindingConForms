@@ -9,7 +9,7 @@ namespace DirectorioFrameWork.Clases
 {
     public class FactoriaTelefono
     {
-        private static BindingList<CTelefono> _telefonos;
+        private static List<CTelefono> _telefonos;
         
         public static CTelefono CrearCTelefono(string nom, decimal tfn)
         {
@@ -19,9 +19,9 @@ namespace DirectorioFrameWork.Clases
             return tfno;
         }
 
-        public static BindingList<CTelefono> ObtenerColeccionCTelefono()
+        public static List<CTelefono> ObtenerColeccionCTelefono()
         {
-            _telefonos = new BindingList<CTelefono>();
+            _telefonos = new List<CTelefono>();
 
             Random rnd = new Random();
 
